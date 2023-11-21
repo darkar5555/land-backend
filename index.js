@@ -19,6 +19,8 @@ dbConnection();
 
 // Rutas
 app.use('/api/usuarios', require('./routes/usuarios'));
+app.use('/api/asosiaciones', require('./routes/asosiaciones'));
+app.use('/api/lotes', require('./routes/lotes'));
 app.use('/api/login', require('./routes/auth'));
 
 app.listen( process.env.PORT, () => {
