@@ -4,13 +4,24 @@ const bcrypt = require('bcryptjs')
 
 const getUsuarios = async(req, res) => {
 
-    const usuarios = await Usuario.find();
+    const desde = Number(req.query.desde) || 0;
+    console.log(desde);
+
+    //const usuarios = await Usuario.find().skip(desde).limit(5);
     // Otra forma de traer solo campos necesarios
     //const usuarios = await Usuario.find({}, 'nombres apellidos dni')
 
+    //const total = Usuario.count();
+
+    const [ usuarios, total ] = await Promise.all([
+        Usuario.find().skip(desde).limit(10),
+        Usuario.countDocuments()
+    ]);
+
     res.json({
         ok: "200",
-        usuarios
+        usuarios,
+        total
     });
 };
 

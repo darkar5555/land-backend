@@ -19,9 +19,11 @@ dbConnection();
 
 // Rutas
 app.use('/api/usuarios', require('./routes/usuarios'));
-app.use('/api/asosiaciones', require('./routes/asosiaciones'));
+app.use('/api/asociaciones', require('./routes/asociaciones'));
 app.use('/api/lotes', require('./routes/lotes'));
+app.use('/api/todo', require('./routes/busquedas'));
 app.use('/api/login', require('./routes/auth'));
+app.use('/api/upload', require('./routes/uploads'));
 
 app.listen( process.env.PORT, () => {
     console.log('Servidor corriendo en el puerto' + 3000);

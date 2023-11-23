@@ -2,14 +2,17 @@ const { Schema, model } = require('mongoose');
 
 const LoteSchema = Schema({
     lote: {
+        required: true,
         type: String,
         required: true
     },
     manzana: {
+        required: true,
         type: String,
         required: true
     },
     etapa: {
+        required: true,
         type: String,
         required: true
     },
@@ -22,16 +25,19 @@ const LoteSchema = Schema({
         required: true
     },
     usuarioCreador: {
+        required: true,
         type: Schema.Types.ObjectId,
         ref: 'Usuario'
     },
     usuario: {
+        required: true,
         type: Schema.Types.ObjectId,
         ref: 'Usuario'
     },
-    asosiacion: {
+    asociacion: {
+        required: true,
         type: Schema.Types.ObjectId,
-        ref: 'Asosiacion'
+        ref: 'Asociacion'
     }
 });
 
