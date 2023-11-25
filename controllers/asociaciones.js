@@ -38,20 +38,69 @@ const crearAsociacion =  async ( req, res = response ) => {
 
 }
 
-const actualizarAsociacion = ( req, res = response ) => {
+const actualizarAsociacion = async ( req, res = response ) => {
 
-    res.json({
-        ok: true,
-        msg: 'actualizarAsociacion'
-    })
+    const id = req.params.id;
+    const uid = req.uid;
+
+    try {
+
+        const asociacion = await Asociacion.findById( id );
+
+        if ( !asociacion ) {
+            return res.status(404).json({
+                ok: true,
+                msg: 'Asociacion no encontrado por id'
+            });
+        }
+
+        const cambiosAsociaciones = {
+            ...req.body,
+            usuario: uid
+        };
+
+        const asociacionActualizado = await Asociacion.findByIdAndUpdate( id, cambiosAsociaciones, { new: true });
+        
+        res.json({
+            ok: true,
+            asociacion: asociacionActualizado
+        });
+    } catch (error) {
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
+    }
 }
 
-const eliminarAsociacion = ( req, res = response ) => {
+const eliminarAsociacion = async ( req, res = response ) => {
 
-    res.json({
-        ok: true,
-        msg: 'eliminarAsociacion'
-    })
+    const id = req.params.id;
+
+    try {
+
+        const asociacion = await Asociacion.findById( id );
+
+        if ( !asociacion ) {
+            return res.status(404).json({
+                ok: true,
+                msg: 'Asociacion no encontrado por id'
+            });
+        }
+
+        await Asociacion.findByIdAndDelete( id );
+        
+        res.json({
+            ok: true,
+            msg: 'Asociacion eliminada'
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
+    }
 }
 
 module.exports = {

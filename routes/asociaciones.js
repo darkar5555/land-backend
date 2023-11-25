@@ -21,9 +21,12 @@ router.post( '/',
 
 router.put( '/:id', 
     [
+        validarJWT,
+        check('nombre', 'El nombre de la asociacion es necesaria').not().isEmpty(),
+        validarCampos
     ], actualizarAsociacion );
 
-router.delete( '/:id', eliminarAsociacion );
+router.delete( '/:id', validarJWT, eliminarAsociacion );
 
 
 module.exports = router;
