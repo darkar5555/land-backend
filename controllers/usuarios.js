@@ -89,7 +89,7 @@ const actualizarUsuario = async(req, res) => {
 
         delete campos.password;
         delete campos.fecha;
-        delete campos.role;
+        // delete campos.role;
         delete campos.permisos;
         delete campos.codigo;
         delete campos.dni;
